@@ -1,0 +1,31 @@
+---
+output: github_document
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+options(tibble.print_min = 5, tibble.print_max = 5)
+```
+
+## Get coronavirus data
+
+This is a simple function to get the structured data from this **webpage**: [https://www.worldometers.info/coronavirus/#countries](https://www.worldometers.info/coronavirus/#countries).
+
+
+## Usage
+
+The use of this function is simple. It is only necessary to obtain it and execute it assigning it to an object.
+
+```{r, message = FALSE}
+# Get function
+source("https://raw.githubusercontent.com/brianmsm/get_coronadata/master/get_coronadata.R")
+
+# Get data
+coronadata <- get_coronadata()
+coronadata
+```
+
