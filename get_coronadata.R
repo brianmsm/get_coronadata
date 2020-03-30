@@ -60,7 +60,9 @@ get_coronadata <- function(show.na = FALSE) {
   # Add NA or not
   if(show.na == FALSE) {
     freq_coronavirus <- freq_coronavirus %>% 
-      dplyr::mutate_all(~ replace(., is.na(.), 0)) 
+      dplyr::mutate_at(dplyr::vars(-c(Date_extract, `Country,Other`,
+                                      `Reported1st case`)), 
+                       ~ replace(., is.na(.), 0)) 
     return(freq_coronavirus)
   } else {
     return(freq_coronavirus)
