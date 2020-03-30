@@ -20,12 +20,23 @@ This is a simple function to get the structured data from this **webpage**: [htt
 
 The use of this function is simple. It is only necessary to obtain it and execute it assigning it to an object.
 
-```{r, message = FALSE}
+```{r message=FALSE, warning=FALSE}
 # Get function
 source("https://raw.githubusercontent.com/brianmsm/get_coronadata/master/get_coronadata.R")
 
-# Get data
+# Get data without NA
 coronadata <- get_coronadata()
 coronadata
 ```
+
+If you prefer to keep the value of `NA` instead of 0, enter the argument `show.na = TRUE`
+
+```{r message=FALSE, warning=FALSE}
+# Get data with NA
+coronadata <- get_coronadata(show.na = TRUE)
+coronadata
+```
+
+
+
 
