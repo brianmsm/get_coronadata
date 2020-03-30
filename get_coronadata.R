@@ -20,7 +20,7 @@ get_coronadata <- function(show.na = FALSE) {
     install.packages("rvest") 
   } 
   
-  if(!"rvest" %in% rownames(installed.packages())) {
+  if(!"xml2" %in% rownames(installed.packages())) {
     install.packages("xml2") 
   } 
   
