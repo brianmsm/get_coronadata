@@ -1,4 +1,4 @@
-get_coronadata <- function() {
+get_coronadata <- function(show.na = FALSE) {
   
   if(!"tidyverse" %in% rownames(installed.packages())) {
     install.packages("dplyr") 
@@ -37,8 +37,13 @@ get_coronadata <- function() {
                    TotalRecovered:`Serious,Critical`),
               ~ stringr::str_replace(., ",", "")) %>% 
     dplyr::mutate_at(dplyr::vars(-`Country,Other`), as.numeric) %>% 
-    dplyr::mutate_all(~ replace(., is.na(.), 0)) %>% 
     tibble::as_tibble()
   
-  return(freq_coronavirus)
+  if(show.na == FALSE) {
+    freq_coronavirus <- freq_coronavirus %>% 
+      dplyr::mutate_all(~ replace(., is.na(.), 0)) 
+    return(freq_coronavirus)
+  } else {
+    return(freq_coronavirus)
+  }
 }
