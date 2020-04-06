@@ -43,25 +43,26 @@ get_coronadata <- function(show.na = FALSE) {
       Date_extract = dplyr::case_when(
         Date_extract == 1 ~ lubridate::ymd(Sys.Date()),
         TRUE ~ lubridate::ymd(Sys.Date()) -1
-      ),
-      `Reported1st case` = paste0("2020 ", `Reported1st case`, sep = ""),
-      `Reported1st case` = lubridate::ymd(`Reported1st case`)
+      )
+      # `Reported1st case` = paste0("2020 ", `Reported1st case`, sep = ""),
+      # `Reported1st case` = lubridate::ymd(`Reported1st case`)
     ) 
   
   # Format numbers
   freq_coronavirus <- freq_coronavirus %>% 
     dplyr::mutate_at(dplyr::vars(NewCases, NewDeaths),
                      ~ stringr::str_remove(., "[+]")) %>% 
-    dplyr::mutate_at(dplyr::vars(TotalCases:`Deaths/1M pop`),
+    dplyr::mutate_at(dplyr::vars(TotalCases:`Tests/1M pop`),
                      ~ stringr::str_replace(., ",", "")) %>% 
-    dplyr::mutate_at(dplyr::vars(-c(Date_extract, `Country,Other`,
-                                    `Reported1st case`)), as.numeric) 
+    dplyr::mutate_at(dplyr::vars(TotalCases:`Tests/1M pop`),
+                     ~ stringr::str_replace(., ",", "")) %>% 
+    dplyr::mutate_at(dplyr::vars(-c(Date_extract, `Country,Other`)),
+                     as.numeric) 
   
   # Add NA or not
   if(show.na == FALSE) {
     freq_coronavirus <- freq_coronavirus %>% 
-      dplyr::mutate_at(dplyr::vars(-c(Date_extract, `Country,Other`,
-                                      `Reported1st case`)), 
+      dplyr::mutate_at(dplyr::vars(-c(Date_extract, `Country,Other`)), 
                        ~ replace(., is.na(.), 0)) 
     return(freq_coronavirus)
   } else {
