@@ -8,7 +8,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-options(tibble.print_min = 5, tibble.print_max = 5)
+options(tibble.print_min = 7, tibble.print_max = 7)
 ```
 
 ## Get coronavirus data
