@@ -1,11 +1,19 @@
 get_coronadata <- function(show.na = FALSE) {
   
-  if(!"tidyverse" %in% rownames(installed.packages())) {
+  if(!"dplyr" %in% rownames(installed.packages())) {
     install.packages("dplyr") 
+  } 
+  
+  if(!"purrr" %in% rownames(installed.packages())) {
+    install.packages("purrr") 
   } 
   
   if(!"tibble" %in% rownames(installed.packages())) {
     install.packages("tibble") 
+  } 
+  
+  if(!"tidyr" %in% rownames(installed.packages())) {
+    install.packages("tidyr") 
   } 
   
   if(!"stringr" %in% rownames(installed.packages())) {
@@ -34,8 +42,12 @@ get_coronadata <- function(show.na = FALSE) {
   freq_coronavirus <- xml2::read_html("https://www.worldometers.info/coronavirus/") %>% 
     rvest::html_nodes("table") %>% 
     rvest::html_table() %>% 
+    purrr::map(~ .x %>% 
+                 mutate(NewDeaths = as.character(NewDeaths))) %>% 
     dplyr::bind_rows(.id = "Date_extract") %>% 
-    tibble::as_tibble()
+    tibble::as_tibble() %>% 
+    dplyr::select(-`#`) %>% 
+    dplyr::filter(`Country,Other` != "")
   
   # Format date 
   freq_coronavirus <- freq_coronavirus %>% 
@@ -50,19 +62,21 @@ get_coronadata <- function(show.na = FALSE) {
   
   # Format numbers
   freq_coronavirus <- freq_coronavirus %>% 
-    dplyr::mutate_at(dplyr::vars(NewCases, NewDeaths),
+    dplyr::mutate_at(dplyr::vars(TotalCases:`Tests/1M pop`),
                      ~ stringr::str_remove(., "[+]")) %>% 
     dplyr::mutate_at(dplyr::vars(TotalCases:`Tests/1M pop`),
                      ~ stringr::str_replace(., ",", "")) %>% 
     dplyr::mutate_at(dplyr::vars(TotalCases:`Tests/1M pop`),
                      ~ stringr::str_replace(., ",", "")) %>% 
-    dplyr::mutate_at(dplyr::vars(-c(Date_extract, `Country,Other`)),
+    dplyr::mutate_at(dplyr::vars(-c(Date_extract, `Country,Other`,
+                                    Continent)),
                      as.numeric) 
   
   # Add NA or not
   if(show.na == FALSE) {
     freq_coronavirus <- freq_coronavirus %>% 
-      dplyr::mutate_at(dplyr::vars(-c(Date_extract, `Country,Other`)), 
+      dplyr::mutate_at(dplyr::vars(-c(Date_extract, `Country,Other`,
+                                      Continent)), 
                        ~ replace(., is.na(.), 0)) 
     return(freq_coronavirus)
   } else {
