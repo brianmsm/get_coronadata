@@ -54,7 +54,8 @@ get_coronadata <- function(show.na = FALSE) {
     dplyr::mutate(
       Date_extract = dplyr::case_when(
         Date_extract == 1 ~ lubridate::ymd(Sys.Date()),
-        TRUE ~ lubridate::ymd(Sys.Date()) -1
+        Date_extract == 2 ~ lubridate::ymd(Sys.Date()) - 1,
+        TRUE ~ lubridate::ymd(Sys.Date()) - 2
       )
       # `Reported1st case` = paste0("2020 ", `Reported1st case`, sep = ""),
       # `Reported1st case` = lubridate::ymd(`Reported1st case`)
