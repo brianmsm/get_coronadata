@@ -18,19 +18,19 @@ coronadata <- get_coronadata()
 coronadata
 #> # A tibble: 690 x 19
 #>   Date_extract `Country,Other` TotalCases NewCases TotalDeaths NewDeaths
-#>   <date>       <chr>                <dbl>    <dbl>       <dbl>     <dbl>
-#> 1 2020-08-19   North America      6692153    26470      251372      1442
-#> 2 2020-08-19   South America      5420711    11000      180089       341
-#> 3 2020-08-19   Asia               5926148    94812      124897      1615
-#> 4 2020-08-19   Europe             3245553    22351      204140       417
-#> 5 2020-08-19   Africa             1145650     4875       26477       120
-#> 6 2020-08-19   Oceania              26251      226         476        12
-#> 7 2020-08-19   World             22457187   159734      787466      3947
-#> # … with 683 more rows, and 13 more variables: TotalRecovered <dbl>,
-#> #   NewRecovered <dbl>, ActiveCases <dbl>, `Serious,Critical` <dbl>,
-#> #   `Tot Cases/1M pop` <dbl>, `Deaths/1M pop` <dbl>, TotalTests <dbl>,
-#> #   `Tests/1M pop` <dbl>, Population <dbl>, Continent <chr>, `1 Caseevery X
-#> #   ppl` <dbl>, `1 Deathevery X ppl` <dbl>, `1 Testevery X ppl` <dbl>
+#>   <date>       <chr>           <chr>      <chr>    <chr>       <chr>    
+#> 1 2020-09-11   North America   7891895    56674    287379      1701     
+#> 2 2020-09-11   Asia            8356190    127894   160765      1698     
+#> 3 2020-09-11   South America   7002336    67503    225561      1589     
+#> 4 2020-09-11   Europe          4013145    41055    211968      407      
+#> 5 2020-09-11   Africa          1345193    8786     32410       232      
+#> 6 2020-09-11   Oceania         29877      150      830         11       
+#> 7 2020-09-11   World           28639357   302062   918928      5638     
+#> # … with 683 more rows, and 13 more variables: TotalRecovered <chr>,
+#> #   NewRecovered <chr>, ActiveCases <chr>, `Serious,Critical` <chr>,
+#> #   `Tot Cases/1M pop` <chr>, `Deaths/1M pop` <chr>, TotalTests <chr>,
+#> #   `Tests/1M pop` <chr>, Population <chr>, Continent <chr>, `1 Caseevery X
+#> #   ppl` <chr>, `1 Deathevery X ppl` <chr>, `1 Testevery X ppl` <chr>
 ```
 
 If you prefer to keep the value of `NA` instead of 0, enter the argument
@@ -42,17 +42,17 @@ coronadata <- get_coronadata(show.na = TRUE)
 coronadata
 #> # A tibble: 690 x 19
 #>   Date_extract `Country,Other` TotalCases NewCases TotalDeaths NewDeaths
-#>   <date>       <chr>                <dbl>    <dbl>       <dbl>     <dbl>
-#> 1 2020-08-19   North America      6692153    26470      251372      1442
-#> 2 2020-08-19   South America      5420711    11000      180089       341
-#> 3 2020-08-19   Asia               5926148    94812      124897      1615
-#> 4 2020-08-19   Europe             3245553    22351      204140       417
-#> 5 2020-08-19   Africa             1145650     4875       26477       120
-#> 6 2020-08-19   Oceania              26251      226         476        12
-#> 7 2020-08-19   World             22457187   159734      787466      3947
-#> # … with 683 more rows, and 13 more variables: TotalRecovered <dbl>,
-#> #   NewRecovered <dbl>, ActiveCases <dbl>, `Serious,Critical` <dbl>,
-#> #   `Tot Cases/1M pop` <dbl>, `Deaths/1M pop` <dbl>, TotalTests <dbl>,
-#> #   `Tests/1M pop` <dbl>, Population <dbl>, Continent <chr>, `1 Caseevery X
-#> #   ppl` <dbl>, `1 Deathevery X ppl` <dbl>, `1 Testevery X ppl` <dbl>
+#>   <date>       <chr>           <chr>      <chr>    <chr>       <chr>    
+#> 1 2020-09-11   North America   7891895    56674    287379      1701     
+#> 2 2020-09-11   Asia            8356190    127894   160765      1698     
+#> 3 2020-09-11   South America   7002336    67503    225561      1589     
+#> 4 2020-09-11   Europe          4013145    41055    211968      407      
+#> 5 2020-09-11   Africa          1345193    8786     32410       232      
+#> 6 2020-09-11   Oceania         29877      150      830         11       
+#> 7 2020-09-11   World           28639357   302062   918928      5638     
+#> # … with 683 more rows, and 13 more variables: TotalRecovered <chr>,
+#> #   NewRecovered <chr>, ActiveCases <chr>, `Serious,Critical` <chr>,
+#> #   `Tot Cases/1M pop` <chr>, `Deaths/1M pop` <chr>, TotalTests <chr>,
+#> #   `Tests/1M pop` <chr>, Population <chr>, Continent <chr>, `1 Caseevery X
+#> #   ppl` <chr>, `1 Deathevery X ppl` <chr>, `1 Testevery X ppl` <chr>
 ```
