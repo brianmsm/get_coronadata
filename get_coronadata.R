@@ -66,12 +66,14 @@ get_coronadata <- function(show.na = FALSE) {
     dplyr::mutate_at(dplyr::vars(TotalCases:`Tests/1M pop`),
                      ~ stringr::str_remove(., "[+]")) %>% 
     dplyr::mutate_at(dplyr::vars(TotalCases:`1 Testevery X ppl`),
-                     ~ stringr::str_replace_all(., ",", "")) %>% 
-    suppressWarnings( 
+                     ~ stringr::str_replace_all(., ",", "")) 
+  
+  suppressWarnings( 
+    freq_coronavirus <- freq_coronavirus %>% 
       dplyr::mutate_at(dplyr::vars(-c(Date_extract, `Country,Other`,
                                       Continent)),
                        as.numeric)
-    )
+  )
   
   # Add NA or not
   if(show.na == FALSE) {
