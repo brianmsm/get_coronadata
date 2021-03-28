@@ -43,7 +43,8 @@ get_coronadata <- function(show.na = FALSE) {
     rvest::html_nodes("table") %>% 
     rvest::html_table() %>% 
     purrr::map(~ .x %>% 
-                 dplyr::mutate(NewDeaths = as.character(NewDeaths))) %>% 
+                 dplyr::mutate(NewCases = as.character(NewCases),
+                               NewDeaths = as.character(NewDeaths))) %>% 
     dplyr::bind_rows(.id = "Date_extract") %>% 
     tibble::as_tibble() %>% 
     dplyr::select(-`#`) %>% 
