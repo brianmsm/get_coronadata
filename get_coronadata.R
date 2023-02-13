@@ -35,6 +35,10 @@ get_coronadata <- function(show.na = FALSE) {
   if(!"lubridate" %in% rownames(installed.packages())) {
     install.packages("lubridate") 
   } 
+
+  if (!"data.table" %in% rownames(installed.packages())) {
+    install.packages("data.table")
+  }
   
   `%>%` <- magrittr::`%>%`
   
@@ -45,7 +49,7 @@ get_coronadata <- function(show.na = FALSE) {
     purrr::map(~ .x %>% 
                  dplyr::mutate(NewCases = as.character(NewCases),
                                NewDeaths = as.character(NewDeaths))) %>% 
-    dplyr::bind_rows(.id = "Date_extract") %>% 
+    data.table::rbindlist(idcol = "Date_extract") %>%
     tibble::as_tibble() %>% 
     dplyr::select(-`#`) %>% 
     dplyr::filter(`Country,Other` != "")
